@@ -52,3 +52,10 @@ function wp_get_menu_array($current_menu) {
     }
     return $menu;
 }
+
+
+function get_post_by_name($post_name, $post_type){
+    global $wpdb;
+    $post = $wpdb->get_row( "SELECT * FROM $wpdb->posts WHERE post_name='".$post_name."' AND post_type='".$post_type."'" );
+    return $post;
+}
