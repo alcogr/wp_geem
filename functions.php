@@ -59,3 +59,14 @@ function get_post_by_name($post_name, $post_type){
     $post = $wpdb->get_row( "SELECT * FROM $wpdb->posts WHERE post_name='".$post_name."' AND post_type='".$post_type."'" );
     return $post;
 }
+
+//set frontend language
+function set_current_language(){
+    session_start();
+    if ( !isset($_SESSION['current_lanugage']['lang'])) 
+         $_SESSION['current_lanugage']['lang'] = 'en'; //default language
+
+    if (isset($_GET['lang']))
+        $_SESSION['current_lanugage']['lang'] = $_GET['lang']; //or change it into selected
+}
+add_action('init','set_current_language');
