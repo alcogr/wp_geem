@@ -8,43 +8,38 @@
 </head>
 <body>
 <header>
-
-
-        <ul class="nav sf-menu">
+    <div class="">
+        <ul class="">
             <?php
-            foreach(wp_get_menu_array('main') as $menu_item):
+                $menu_items = [
+                    "Home" => "home",
+                    "Services" => [
+                        "Our Services" => "services",
+                        "Service Details" => "details"
+                    ],
+                    "Contact" => "contact"
+                ];
             ?>
-                <li class=" <?= current_page($menu_item['title']) ?>">
-            
-                    <?php if (!$menu_item['children']): ?>
-                        <a href="<?= $menu_item['url']?>">
-                            <?= $menu_item['title']?>
-                        </a>
-                    <?php endif; ?>
-            
-                    <?php if ($menu_item['children']): ?>
-                     <a href="#"><?= $menu_item['title']?></a>
+    
+            @foreach($menu_items as $key=>$val)
+                @if ( is_array ($val) )
+                    <li class="dropdown {{current_page($key)}}"><a href="#">{{$key}}</a>
                         <ul>
-                    <?php endif; ?>
-                            
-                   <?php  foreach($menu_item['children'] as $i=>$submenu_item):?>
-                   <li>
-                    <a href="<?= $submenu_item['url']?>">
-                        <?= $submenu_item['title']?>
-                    </a>
-                   </li>
-                    
-                    <?php endforeach;?>
-                     
-                   <?php if ($menu_item['children']): ?>
-            </ul>
-                    <?php endif; ?>
-                </li>
-            <?php
-            endforeach;
-            ?>
+                            @foreach($val as $key2=>$val2)
+                                <li class=""><a href="{{site_url()}}/{{$val2}}">{{$key2}}</a>
+                            @endforeach
+                        </ul>
+                    </li>
+                @else 
+                    <li class="{{current_page($key)}}"><a href="{{site_url()}}/{{$val}}">{{$key}}</a>
+                @endif
+            @endforeach
+    
         </ul>
+    </div>
+
 </header>
+
 @yield('content')
 <footer>
 
