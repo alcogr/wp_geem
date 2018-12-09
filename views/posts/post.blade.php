@@ -1,5 +1,6 @@
 <?php 
-$post = get_post_by_name($_GET['title'],'post');
+$post =  get_post($_GET['id']);
+if($post->post_type != "post") return;
 ?>
 
 @extends('app')

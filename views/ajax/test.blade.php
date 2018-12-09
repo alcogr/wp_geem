@@ -1,2 +1,3 @@
-
-<?php var_dump($_POST);?>
+<?php
+header('Content-type: application/json');
+echo json_encode($_POST);

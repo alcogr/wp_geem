@@ -1,5 +1,5 @@
 <?php 
-$post = get_post_by_name($_GET['title'],'movie');
+$post =  get_post($_GET['id']);
 ?>
 
 @extends('app')

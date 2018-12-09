@@ -12,16 +12,10 @@
     <div class="">
         <ul class="">
             @include('menu')
-    
         </ul>
     </div>
-
 </header>
-<a href="{{site_url()}}/?lang=en">English</a>
-<a href="{{site_url()}}/?lang=el">Ελληνικά</a>
-
 @yield('content')
-@yield('translation')
 <footer>
 
 </footer>

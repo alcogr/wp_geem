@@ -8,7 +8,7 @@
 $ajax_functions = [
     "are_you_there",
     "i_am_here"
-];
+];//just add stringsd here and define functions afterwards with the proper view
 
 //load ajax_functions
 foreach($ajax_functions as $ajax){
