@@ -28,3 +28,7 @@ function set_current_language(){
         $_SESSION['current_language']['lang'] = $_GET['lang']; //or change it into selected
 }
 add_action('init','set_current_language');
+
+function __t($t,$key){
+   return $t[$key][ $_SESSION['current_language']['lang'] ];
+}
