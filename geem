@@ -1,0 +1,52 @@
+<?php
+
+function colorLog($str, $type = 'i'){
+    switch ($type) {
+        case 'e': //error
+            echo "\033[31m$str \033[0m\n";
+        break;
+        case 's': //success
+            echo "\033[32m$str \033[0m\n";
+        break;
+        case 'w': //warning
+            echo "\033[33m$str \033[0m\n";
+        break;  
+        case 'i': //info
+            echo "\033[36m$str \033[0m\n";
+        break;      
+        default:
+        # code...
+        break;
+    }
+}
+
+switch ( $argv[1] ){
+    case "create-page":
+        if( file_exists(__DIR__."/views/pages/".$argv[2].".blade.php")){
+            colorLog("File Already Exists!","e");
+            break;
+        }
+        $fh = fopen(__DIR__."/views/pages/".$argv[2].".blade.php", 'w') or die("Can't create file");
+        $txt = "@extends('app')\n\n@section('content')\n\n@endsection\n\n@section('extra-js')\n\n@endsection\n";
+        fwrite($fh, $txt);
+        fclose($fh);
+        colorLog("Page created! - Happy Coding!","i");
+        break;
+    case "create-post":
+        if( file_exists(__DIR__."/views/posts/".$argv[2].".blade.php")){
+            colorLog("File Already Exists!","e");
+            break;
+        }
+        $fh = fopen(__DIR__."/views/posts/".$argv[2].".blade.php", 'w') or die("Can't create file");
+        $txt = "@extends('app')\n\n@php\n\n\$post=\Models\\".ucfirst($argv[2])."::get_post_by_id(\$id);\n\n@endphp\n\n@section('content')\n\n@endsection\n\n@section('extra-js')\n\n@endsection\n";
+        fwrite($fh, $txt);
+        fclose($fh);
+        colorLog("Post created! - Happy Coding!","i");
+        break;
+    case "create-model":
+        break;
+        
+}
+
+colorLog("Script Ended!","s");
+

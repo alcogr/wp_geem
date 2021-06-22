@@ -1,25 +1,27 @@
 @extends('app')
 
+@section("extra-css")
+    <style>
 
+    </style>
+@endsection
 
 @section('content')
+    <div class="my-class">If this is read. Styles are loaded</div>
+@endsection
 
-
+@section("extra-js")
+    Extra js are loaded here! Look the Console for some ajax action!
     <script>
-        $(document).ready(function(){
-            $.ajax({
-                url :  '{{admin_url( 'admin-ajax.php' )}}',
-                type : 'post',
-                data : {
-                    action : 'i_am_here',
-                    post_id : "4"
-                },
-                success : function( response ) {
-                   console.log(response);
-                }
-            });
-        });
-    </script>
+        jQuery.ajax({
+             type : "post",
+             dataType : "json",
+             url : "{{route("wp-admin/admin-ajax.php")}}",
+             data : {action: "ajax_test", param: "Hello World!"},
+             success: function(response) {
+                console.log(response)
+             }
+          });
+        </script>
 
-    
 @endsection
